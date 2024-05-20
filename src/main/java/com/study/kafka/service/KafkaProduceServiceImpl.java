@@ -11,7 +11,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Service
 @RequiredArgsConstructor
 public class KafkaProduceServiceImpl implements KafkaProduceService {
-    private static final String TOPIC_NAME = "topic5";
+    private static final String TOPIC_NAME = "music";
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTemplate<String, MyMessage> jsonKafkaTemplate;
 

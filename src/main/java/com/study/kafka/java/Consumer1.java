@@ -14,7 +14,7 @@ import java.util.Properties;
 @Slf4j
 public class Consumer1 {
     private final static String BOOTSTRAP_SERVER = "localhost:9092";
-    private final static String TOPIC_NAME = "topic5";
+    private final static String TOPIC_NAME = "TOPIC_NAME";
     private final static String GROUP_ID = "group_one";
 
     public static void main(String[] args) {

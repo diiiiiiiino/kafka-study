@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaConsumer {
-    private static final String TOPIC_NAME = "topic5";
+    private static final String TOPIC_NAME = "music";
 
     ObjectMapper objectMapper = new ObjectMapper();
 

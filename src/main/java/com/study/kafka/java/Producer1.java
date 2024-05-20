@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Producer1 {
     private final static String BOOTSTRAP_SERVER = "localhost:9092";
-    private final static String TOPIC_NAME = "topic5";
+    private final static String TOPIC_NAME = "TOPIC_NAME";
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties configs = new Properties();
