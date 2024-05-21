@@ -1,5 +1,6 @@
 package com.study.kafka.controller;
 
+import JavaSessionize.avro.Music;
 import com.study.kafka.dto.MyMessage;
 import com.study.kafka.service.KafkaProduceService;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,11 @@ public class ProducerController {
     public String publish3(@RequestBody MyMessage message){
         kafkaProduceService.sendJson(message);
         return "published a message : " + message.getName() + "," + message.getMessage();
+    }
+
+    @PostMapping("/publish4")
+    public String publish4(@RequestBody Music message){
+        kafkaProduceService.sendAvro(message);
+        return "published a message : " + message.getSinger() + "," + message.getTitle();
     }
 }

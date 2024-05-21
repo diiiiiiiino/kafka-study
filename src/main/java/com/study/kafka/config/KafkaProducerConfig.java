@@ -1,7 +1,9 @@
 package com.study.kafka.config;
 
+import JavaSessionize.avro.Music;
 import com.fasterxml.jackson.databind.JsonSerializable;
 import com.study.kafka.dto.MyMessage;
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -46,5 +48,21 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String, MyMessage> jsonKafkaTemplate(){
         return new KafkaTemplate<>(jsonProducerFactory());
+    }
+
+    @Bean
+    public ProducerFactory<String, Music> avroProducerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+        configProps.put("schema.registry.url", "192.168.50.1:8081");
+
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Music> avroKafkaTemplate(){
+        return new KafkaTemplate<>(avroProducerFactory());
     }
 }

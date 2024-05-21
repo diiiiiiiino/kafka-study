@@ -1,5 +1,6 @@
 package com.study.kafka.service;
 
+import JavaSessionize.avro.Music;
 import com.study.kafka.dto.MyMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,6 +15,7 @@ public class KafkaProduceServiceImpl implements KafkaProduceService {
     private static final String TOPIC_NAME = "music";
     private final KafkaTemplate<String, String> kafkaTemplate;
     private final KafkaTemplate<String, MyMessage> jsonKafkaTemplate;
+    private final KafkaTemplate<String, Music> avroKafkaTemplate;
 
     @Override
     public void send(String message){
@@ -40,5 +42,10 @@ public class KafkaProduceServiceImpl implements KafkaProduceService {
                 System.out.println("Send " + message + " offset : " + result.getRecordMetadata().offset());
             }
         });
+    }
+
+    @Override
+    public void sendAvro(Music message) {
+        avroKafkaTemplate.send(TOPIC_NAME, message);
     }
 }
