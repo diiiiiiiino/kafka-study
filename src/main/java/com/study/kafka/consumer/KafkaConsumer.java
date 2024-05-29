@@ -1,7 +1,10 @@
 package com.study.kafka.consumer;
 
+import JavaSessionize.avro.Music;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.kafka.dto.MyMessage;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +15,10 @@ public class KafkaConsumer {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @KafkaListener(topics = TOPIC_NAME)
-    public void listenMessage(String jsonMessage) {
+    public void listenMessage(ConsumerRecord<String, Music> record) {
         try{
-            MyMessage message = objectMapper.readValue(jsonMessage, MyMessage.class);
-            System.out.println(">>>" + message.getName() + "," + message.getMessage());
+            Music music = record.value();
+            System.out.println(">>>" + music.getTitle() + "," + music.getSinger());
         } catch(Exception e) {
             e.printStackTrace();
         }
